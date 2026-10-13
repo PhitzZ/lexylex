@@ -3,33 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffe1ee">
+<meta name="format-detection" content="telephone=no">
 <title>Do you like me?</title>
 <style>
 :root{
-  --bg1:#ffe0ec;--bg2:#ffb3cf;--text:#7a1038;--card:rgba(255,255,255,.6);--card-solid:#fff;
+  --bg1:#fff1f7;--bg2:#ffd3e6;--text:#7a1038;--card:rgba(255,255,255,.78);--card-solid:#fff;
   --yes:#ff3d7f;--no:#ffffff;--no-text:#7a1038;--hl:#ffe066;
   color-scheme:light;box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg1:#3a0d24;--bg2:#1d0613;--text:#ffd3e4;--card:rgba(255,255,255,.1);--card-solid:#2a0b1c;
-    --yes:#ff4f8b;--no:#4a1a31;--no-text:#ffd3e4;--hl:#a06a00;color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg1:#3a0d24;--bg2:#1d0613;--text:#ffd3e4;--card:rgba(255,255,255,.1);--card-solid:#2a0b1c;
-  --yes:#ff4f8b;--no:#4a1a31;--no-text:#ffd3e4;--hl:#a06a00;color-scheme:dark;
-}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;background:#ffe1ee}
 html,body{height:100%;margin:0;overscroll-behavior:none}
 body{
+  position:fixed;top:0;left:0;right:0;bottom:0;width:100%;
   background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--text);
   font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
-  touch-action:none;cursor:none;
+  -webkit-tap-highlight-color:transparent;touch-action:none;cursor:none;
 }
-.layer{position:fixed;inset:0}
+.layer{position:fixed;top:0;left:0;right:0;bottom:0}
 #fx{z-index:1;pointer-events:none;width:100%;height:100%}
 #hearts{z-index:2;pointer-events:none;overflow:hidden}
 .heart{position:absolute;bottom:-40px;animation:floatUp linear forwards}
@@ -37,23 +31,24 @@ body{
 
 /* ---------- app screens ---------- */
 #app{z-index:10;pointer-events:none}
-.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;box-sizing:border-box}
+.screen{position:absolute;top:0;left:0;right:0;bottom:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;box-sizing:border-box}
 .screen.show{display:flex}
-.card{background:var(--card);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:28px;padding:30px 20px 24px;width:min(92vw,420px);box-shadow:0 12px 40px rgba(255,61,127,.3)}
+.card{background:var(--card);border-radius:28px;padding:30px 20px 24px;width:min(92vw,420px);box-shadow:0 12px 40px rgba(255,61,127,.3)}
 .emoji{font-size:54px;animation:beat 1.2s infinite}
 h1{font-size:clamp(28px,8.5vw,40px);margin:8px 0 4px;line-height:1.15}
 .sub{min-height:44px;font-size:15px;font-weight:600;margin:4px 0 8px}
-.row{display:flex;gap:14px;justify-content:center;align-items:center;min-height:100px}
+.row{display:flex;justify-content:center;align-items:center;min-height:100px}
+.row>*+*{margin-left:14px}
 .slot{display:flex;align-items:center;justify-content:center}
-button{font:inherit;font-weight:800;border:0;border-radius:999px;pointer-events:none;margin:0}
+button{font:inherit;font-weight:800;border:0;border-radius:999px;pointer-events:none;margin:0;-webkit-appearance:none;appearance:none}
 .btn-yes{background:var(--yes);color:#fff;font-size:15px;padding:10px 20px;box-shadow:0 6px 18px rgba(255,61,127,.5);transition:transform .25s ease}
 .btn-no{background:var(--no);color:var(--no-text);font-size:26px;padding:16px 46px;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:left .3s cubic-bezier(.34,1.56,.64,1),top .3s cubic-bezier(.34,1.56,.64,1)}
 
 /* ---------- popup ---------- */
 #modal{z-index:100;display:none;align-items:center;justify-content:center;pointer-events:none}
 #modal.show{display:flex}
-#modal .backdrop{position:absolute;inset:0;background:rgba(40,0,20,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.popup{position:relative;background:var(--card-solid);color:var(--text);border-radius:28px;padding:28px 20px 22px;width:min(88vw,380px);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);border:3px solid var(--yes);animation:popin .4s cubic-bezier(.34,1.56,.64,1)}
+#modal .backdrop{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(122,16,56,.35)}
+.popup{position:relative;background:var(--card-solid);color:var(--text);border-radius:28px;padding:28px 20px 22px;width:min(88vw,380px);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35);border:3px solid var(--yes);animation:popin .4s cubic-bezier(.34,1.56,.64,1)}
 .popup h2{margin:6px 0 4px;font-size:30px}
 @keyframes popin{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
 
@@ -63,7 +58,8 @@ button{font:inherit;font-weight:800;border:0;border-radius:999px;pointer-events:
 .msg{margin:4px 0 0;font-size:clamp(21px,6.4vw,31px);line-height:1.45;font-weight:800}
 .hl{background:linear-gradient(transparent 50%,var(--hl) 50%);padding:0 6px;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .name{display:inline-block;font-size:1.2em;color:#fff;background:linear-gradient(90deg,#ff3d7f,#ff7a3d);padding:0 14px;border-radius:14px;margin:4px 0;box-shadow:0 4px 12px rgba(255,61,127,.45)}
-#loveAsk{opacity:0;transition:opacity .9s;margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:16px}
+#loveAsk{opacity:0;transition:opacity .9s;margin-top:18px;display:flex;flex-direction:column;align-items:center}
+#loveAsk>*+*{margin-top:16px}
 #loveAsk.show{opacity:1}
 .ask{font-size:20px;font-weight:800;background:var(--card-solid);color:var(--text);padding:8px 20px;border-radius:999px;box-shadow:0 6px 18px rgba(255,61,127,.3)}
 .demon{position:relative;background:radial-gradient(circle at 50% 30%,#b00000,#2b0000);color:#fff;font-size:24px;padding:14px 34px;border:3px solid #ff3b1f;box-shadow:0 0 18px #ff2a00,inset 0 0 14px rgba(0,0,0,.7);text-shadow:0 0 8px #ff6a00;letter-spacing:1px;animation:demonPulse 1s infinite alternate}
@@ -72,12 +68,12 @@ button{font:inherit;font-weight:800;border:0;border-radius:999px;pointer-events:
 .demon::after{right:18px;transform:rotate(14deg)}
 @keyframes demonPulse{from{box-shadow:0 0 12px #ff2a00,inset 0 0 14px rgba(0,0,0,.7);transform:scale(1)}to{box-shadow:0 0 30px #ff4400,inset 0 0 14px rgba(0,0,0,.7);transform:scale(1.05)}}
 
-#angel{position:fixed;left:0;top:0;width:160px;height:130px;display:none;will-change:transform;filter:drop-shadow(0 8px 12px rgba(255,61,127,.5));z-index:20}
+#angel{position:fixed;left:0;top:0;width:160px;height:130px;display:none;will-change:transform;-webkit-filter:drop-shadow(0 8px 12px rgba(255,61,127,.5));filter:drop-shadow(0 8px 12px rgba(255,61,127,.5));z-index:20}
 #angel svg{width:100%;height:100%;overflow:visible;display:block}
 #angelHit{position:absolute;left:35px;top:30px;width:90px;height:88px}
-.wl{transform-origin:44px 64px;animation:flapL .32s ease-in-out infinite alternate}
-.wr{transform-origin:116px 64px;animation:flapR .32s ease-in-out infinite alternate}
-.hb{transform-origin:80px 80px;animation:hbeat .8s ease-in-out infinite}
+.wl{transform-box:view-box;transform-origin:44px 64px;animation:flapL .32s ease-in-out infinite alternate}
+.wr{transform-box:view-box;transform-origin:116px 64px;animation:flapR .32s ease-in-out infinite alternate}
+.hb{transform-box:view-box;transform-origin:80px 80px;animation:hbeat .8s ease-in-out infinite}
 @keyframes flapL{from{transform:rotate(-14deg)}to{transform:rotate(18deg)}}
 @keyframes flapR{from{transform:rotate(14deg)}to{transform:rotate(-18deg)}}
 @keyframes hbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
@@ -126,13 +122,13 @@ body.shake #app,body.shake #hell{animation:shake .12s linear 6}
 .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
 .cloud::before{width:50%;height:150%;left:14%;top:-65%}
 .cloud::after{width:40%;height:125%;right:14%;top:-48%}
-#ascend{position:absolute;inset:0;opacity:0;transition:opacity .8s}
+#ascend{position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;transition:opacity .8s}
 #ascend.go{opacity:1}
 #ascend .cloud{top:0;animation:cloudDown var(--d) linear infinite;animation-delay:var(--dl)}
 @keyframes cloudDown{from{transform:translateY(-30vh)}to{transform:translateY(150vh)}}
 #floatClouds .cloud{animation:drift var(--d) ease-in-out infinite alternate}
 @keyframes drift{from{transform:translateX(-30px)}to{transform:translateX(40px)}}
-.scene{position:absolute;inset:0;opacity:0;transition:opacity 1.4s}
+.scene{position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;transition:opacity 1.4s}
 .scene.show{opacity:1}
 .hill{position:absolute;left:-25%;right:-25%;bottom:-10%;height:32%;background:radial-gradient(ellipse at 50% 0,#8fe388,#4cc26a 60%,#2f9e55);border-radius:50% 50% 0 0/40% 40% 0 0}
 .hill.back{bottom:-4%;height:34%;background:radial-gradient(ellipse at 50% 0,#b5f2ae,#7fd88d 65%,#4cc26a);left:-40%;right:0}
@@ -149,12 +145,12 @@ body.shake #app,body.shake #hell{animation:shake .12s linear 6}
 .guest{font-size:34px;animation:hop 1s ease-in-out infinite alternate}
 @keyframes hop{from{transform:translateY(0)}to{transform:translateY(-12px)}}
 .dove{left:0;font-size:34px;animation:fly var(--d) linear infinite;animation-delay:var(--dl)}
-@keyframes fly{0%{transform:translateX(-20vw) translateY(0)}50%{transform:translateX(50vw) translateY(-26px)}100%{transform:translateX(120vw) translateY(0)}}
+@keyframes fly{0%{transform:translateX(120vw) translateY(0)}50%{transform:translateX(50vw) translateY(-26px)}100%{transform:translateX(-20vw) translateY(0)}}
 .balloon{bottom:-60px;font-size:36px;animation:balloon var(--d) ease-in infinite;animation-delay:var(--dl)}
 @keyframes balloon{from{transform:translateY(0) translateX(0)}to{transform:translateY(-115vh) translateX(var(--sx))}}
 .spark{position:absolute;font-size:18px;animation:twinkle 1.6s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.2)}}
-#cf{position:absolute;inset:0;width:100%;height:100%}
+#cf{position:absolute;top:0;left:0;width:100%;height:100%}
 #hcap{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 8vh);text-align:center;padding:0 16px}
 #hcap span{display:inline-block;background:rgba(255,255,255,.92);color:#7a1038;font-weight:800;font-size:clamp(20px,6vw,32px);padding:10px 22px;border-radius:999px;box-shadow:0 8px 26px rgba(255,170,60,.5);animation:pop .7s cubic-bezier(.34,1.56,.64,1) both}
 #hfinal{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 5vh);display:none;justify-content:center;padding:0 14px}
@@ -172,7 +168,7 @@ body.shake #app,body.shake #hell{animation:shake .12s linear 6}
 #pad{z-index:900;touch-action:none}
 #cursor{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;will-change:transform}
 #cursor .ring{position:absolute;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border:3px solid var(--yes);border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 12px var(--yes)}
-#cursor .hand{position:absolute;left:0;top:0;font-size:48px;line-height:1;transform:translate(-50%,-6%);filter:drop-shadow(0 5px 6px rgba(0,0,0,.3));transition:transform .1s}
+#cursor .hand{position:absolute;left:0;top:0;font-size:48px;line-height:1;transform:translate(-50%,-6%);-webkit-filter:drop-shadow(0 5px 6px rgba(0,0,0,.3));filter:drop-shadow(0 5px 6px rgba(0,0,0,.3));transition:transform .1s}
 #cursor.idle .hand{animation:hbob 1s ease-in-out infinite}
 #cursor.press .hand{transform:translate(-50%,-6%) scale(.82)}
 @keyframes hbob{0%,100%{transform:translate(-50%,-6%)}50%{transform:translate(-50%,-30%)}}
@@ -208,7 +204,7 @@ body.shake #app,body.shake #hell{animation:shake .12s linear 6}
   <div id="s3" class="screen">
     <div class="msgcard">
       <div class="big">💖</div>
-      <h2 class="msg">Thank you for liking me back, <span class="name">Lexy!</span><br><span class="hl">let's get married EME! 💍</span></h2>
+      <h2 class="msg">Thank you for liking me back<span class="name">Lexy!</span><br><span class="hl">let's get married EME! 💍</span></h2>
     </div>
     <div id="loveAsk">
       <div class="ask">Will you marry me? *TESTING LANG 💍</div>
@@ -292,7 +288,7 @@ body.shake #app,body.shake #hell{animation:shake .12s linear 6}
   <div id="hfinal">
     <div class="fcard">
       <div style="font-size:40px">😇💖</div>
-      <h2 class="msg">Thanks sa pagtry! <span class="name">Lexy</span><br><span class="hl">Ano g na ba natin to? HAHAHAHA eme! 😝</span></h2>
+      <h2 class="msg">Thanks sa pagtry!  <span class="name">Lexy</span><br><span class="hl">Pero ano g na ba natin to? HAHAHAHA eme! 😝</span></h2>
       <div class="replay" id="replay">Replay 💞</div>
     </div>
   </div>
@@ -314,9 +310,11 @@ var sub=$('sub'),sub2=$('sub2'),loveAsk=$('loveAsk'),hellEl=$('hell'),heavenEl=$
 var state='q1',locked=false,askReady=false,clickedOnce=false,pauseHearts=false,emberTimer=null;
 var cur={x:innerWidth/2,y:innerHeight*0.78};
 
-/* ---------- block page gestures ---------- */
+/* ---------- block page gestures (iOS) ---------- */
 document.addEventListener('touchmove',function(e){e.preventDefault();},{passive:false});
 document.addEventListener('gesturestart',function(e){e.preventDefault();});
+document.addEventListener('gesturechange',function(e){e.preventDefault();});
+document.addEventListener('dblclick',function(e){e.preventDefault();});
 
 /* ---------- hint ---------- */
 var hintTimer;
@@ -338,57 +336,81 @@ setCursor(cur.x,cur.y);
 function ripple(x,y){
   var r=document.createElement('div');r.className='ripple';
   r.style.left=x+'px';r.style.top=y+'px';document.body.appendChild(r);
-  setTimeout(function(){r.remove();},600);
+  setTimeout(function(){if(r.parentNode)r.parentNode.removeChild(r);},600);
 }
 function buzz(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
 
-var drag=null,SENS=1.7,DEAD=8;
-pad.addEventListener('pointerdown',function(e){
+var SENS=1.7,DEAD=8;
+
+/* --- touch (iPhone / Android): drag = move the hand, tap = click --- */
+var tdrag=null;
+function findTouch(list,id){for(var i=0;i<list.length;i++)if(list[i].identifier===id)return list[i];return null;}
+pad.addEventListener('touchstart',function(e){
   e.preventDefault();
-  try{pad.setPointerCapture(e.pointerId);}catch(_){}
+  if(tdrag)return;
+  var t=e.changedTouches[0];
+  tdrag={id:t.identifier,lx:t.clientX,ly:t.clientY,moved:0,t:Date.now()};
   cursorEl.classList.add('press');
-  var mouse=e.pointerType==='mouse';
-  if(mouse){cursorEl.classList.remove('idle');setCursor(e.clientX,e.clientY);}
-  drag={lx:e.clientX,ly:e.clientY,moved:0,t:Date.now(),mouse:mouse};
+},{passive:false});
+pad.addEventListener('touchmove',function(e){
+  e.preventDefault();
+  if(!tdrag)return;
+  var t=findTouch(e.changedTouches,tdrag.id);if(!t)return;
+  var dx=t.clientX-tdrag.lx,dy=t.clientY-tdrag.ly;
+  tdrag.lx=t.clientX;tdrag.ly=t.clientY;
+  tdrag.moved+=Math.abs(dx)+Math.abs(dy);
+  if(tdrag.moved>DEAD){cursorEl.classList.remove('idle');setCursor(cur.x+dx*SENS,cur.y+dy*SENS);}
+},{passive:false});
+function touchEnd(e){
+  e.preventDefault();
+  if(!tdrag)return;
+  var t=findTouch(e.changedTouches,tdrag.id);if(!t)return;
+  cursorEl.classList.remove('press');
+  if(e.type==='touchend'&&tdrag.moved<=DEAD&&Date.now()-tdrag.t<650)doClick(cur.x,cur.y);
+  tdrag=null;
+}
+pad.addEventListener('touchend',touchEnd,{passive:false});
+pad.addEventListener('touchcancel',touchEnd,{passive:false});
+
+/* --- mouse / pen (desktop): cursor follows the pointer, click = click --- */
+var mdrag=null;
+pad.addEventListener('pointerdown',function(e){
+  if(e.pointerType==='touch')return;
+  e.preventDefault();
+  cursorEl.classList.add('press');cursorEl.classList.remove('idle');
+  setCursor(e.clientX,e.clientY);
+  mdrag={x:e.clientX,y:e.clientY,t:Date.now()};
 });
 pad.addEventListener('pointermove',function(e){
-  e.preventDefault();
-  if(e.pointerType==='mouse'){
-    cursorEl.classList.remove('idle');setCursor(e.clientX,e.clientY);
-    if(drag)drag.moved+=Math.abs(e.movementX||0)+Math.abs(e.movementY||0);
-    return;
-  }
-  if(!drag)return;
-  var dx=e.clientX-drag.lx,dy=e.clientY-drag.ly;
-  drag.lx=e.clientX;drag.ly=e.clientY;
-  drag.moved+=Math.abs(dx)+Math.abs(dy);
-  if(drag.moved>DEAD){cursorEl.classList.remove('idle');setCursor(cur.x+dx*SENS,cur.y+dy*SENS);}
+  if(e.pointerType==='touch')return;
+  cursorEl.classList.remove('idle');setCursor(e.clientX,e.clientY);
 });
-pad.addEventListener('pointerup',function(){
+pad.addEventListener('pointerup',function(e){
+  if(e.pointerType==='touch')return;
   cursorEl.classList.remove('press');
-  if(drag){
-    if(drag.moved<=DEAD&&Date.now()-drag.t<650)doClick(cur.x,cur.y);
-    drag=null;
+  if(mdrag){
+    if(Math.hypot(e.clientX-mdrag.x,e.clientY-mdrag.y)<10&&Date.now()-mdrag.t<650)doClick(cur.x,cur.y);
+    mdrag=null;
   }
 });
-pad.addEventListener('pointercancel',function(){cursorEl.classList.remove('press');drag=null;});
+pad.addEventListener('pointercancel',function(){cursorEl.classList.remove('press');mdrag=null;});
 pad.addEventListener('contextmenu',function(e){e.preventDefault();});
 
 /* ---------- hit testing ---------- */
-function hit(el,pad){
+function hit(el,p){
   var r=el.getBoundingClientRect();
   if(!r.width)return false;
-  pad=pad||0;
-  return cur.x>=r.left-pad&&cur.x<=r.right+pad&&cur.y>=r.top-pad&&cur.y<=r.bottom+pad;
+  p=p||0;
+  return cur.x>=r.left-p&&cur.x<=r.right+p&&cur.y>=r.top-p&&cur.y<=r.bottom+p;
 }
 function overlap(a,b,p){return !(a.right+p<b.left||a.left-p>b.right||a.bottom+p<b.top||a.top-p>b.bottom);}
 
 /* ---------- dodging NO buttons ---------- */
-var lines1=["Nope! Try again 😜","Bilisan mo mag NO! 😝","Wahaha kala mo ah 🤭","Anong NO? tadoo 🙈","HAHAHA mag yes ka please! 😏","Ano NO talaga? huhu 🥹","EHHHH tampal gusto?","Okay seriously… YES? 💗"];
-var lines2=["ano TAMPAL GUSTO MO?! 😆","Nice try diddy! 😜","HAHAHA wag, walang ganyanan","Press YES, Lexy 🥺","Anong No? di pwede yan 🙈"];
+var lines1=["Nope! Try again 😜","Bilisan mo mag NO! 😝","WAHAHAHA kala mo ah 🤭","Anong NO? tadoo 🙈","HAHAHA mag yes ka please! 😏","Ano NO talaga? huhu 🥹","EHHHH tampal gusto?","Okay seriously… YES? 💗"];
+var lines2=["ano TAMPAL GUSTO MO?! 😆","Nice try lexy! 😜","HAHAHA wag, walang ganyanan","Press YES, Lexy 🥺","Anong No? di pwede yan 🙈","Mag yes kana WAHAHAHA 😝","NAH? nanafinish na 😆","Sa Classroom may batas! 😏"];
 var dodgers=[
-  {btn:no,slot:$('noSlot'),yes:yes,sub:sub,lines:lines1,n:0,scale:1,moved:false,active:function(){return state==='q1';}},
-  {btn:no2,slot:$('noSlot2'),yes:yes2,sub:sub2,lines:lines2,n:0,scale:1,moved:false,active:function(){return state==='sure';}}
+  {btn:no,slot:$('noSlot'),yes:yes,avoid:document.querySelector('#s1 .card'),sub:sub,lines:lines1,n:0,scale:1,moved:false,active:function(){return state==='q1';}},
+  {btn:no2,slot:$('noSlot2'),yes:yes2,avoid:document.querySelector('#modal .popup'),sub:sub2,lines:lines2,n:0,scale:1,moved:false,active:function(){return state==='sure';}}
 ];
 function targetRect(d){
   if(!d.moved)return d.btn.getBoundingClientRect();
@@ -412,17 +434,18 @@ function dodge(d){
     d.moved=true;d.tx=r.left;d.ty=r.top;void b.offsetWidth;b.style.transition='';
   }
   var vw=innerWidth,vh=innerHeight,m=10,topM=64,botM=84;
-  var yr=d.yes.getBoundingClientRect(),best=null,bd=-1;
+  var yr=d.yes.getBoundingClientRect(),ar=d.avoid?d.avoid.getBoundingClientRect():null,best=null,bd=-1;
   for(var i=0;i<60;i++){
     var x=m+Math.random()*Math.max(1,vw-d.w-2*m);
     var y=topM+Math.random()*Math.max(1,vh-d.h-topM-botM);
     var rc={left:x,top:y,right:x+d.w,bottom:y+d.h};
     if(overlap(rc,yr,14))continue;
+    if(ar&&ar.width&&overlap(rc,ar,10))continue;
     var dist=Math.hypot(x+d.w/2-cur.x,y+d.h/2-cur.y);
     if(dist>bd){bd=dist;best={x:x,y:y};}
     if(dist>Math.min(vw,vh)*0.55)break;
   }
-  if(!best)best={x:m,y:topM};
+  if(!best)best={x:m+Math.random()*Math.max(1,vw-d.w-2*m),y:topM};
   d.tx=best.x;d.ty=best.y;b.style.left=best.x+'px';b.style.top=best.y+'px';
   d.n++;d.scale=Math.min(1+d.n*0.06,1.35);
   d.yes.style.transform='scale('+d.scale+')';
@@ -456,7 +479,7 @@ function doClick(x,y){
 
 /* ---------- flow ---------- */
 function openSure(){
-  buzz(30);state='sure';modal.classList.add('show');
+  buzz(30);state='sure';s1.classList.remove('show');modal.classList.add('show');
 }
 function goLove(){
   buzz([40,30,40]);state='love';
@@ -477,7 +500,7 @@ function spawnHeart(){
   el.style.left=Math.random()*100+'vw';el.style.fontSize=(18+Math.random()*26)+'px';
   el.style.setProperty('--dx',((Math.random()-.5)*120)+'px');
   el.style.animationDuration=(4+Math.random()*4)+'s';
-  $('hearts').appendChild(el);setTimeout(function(){el.remove();},8500);
+  $('hearts').appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},8500);
 }
 (function tick(){
   if(!pauseHearts)spawnHeart();
@@ -536,8 +559,16 @@ function startFlowers(){
 /* ---------- winged heart YES ---------- */
 var ang={x:0,y:0,vx:0,vy:0,tx:0,ty:0,next:0,on:false,last:0};
 function pickTarget(now){
-  ang.tx=80+Math.random()*Math.max(1,innerWidth-160);
-  ang.ty=90+Math.random()*Math.max(1,innerHeight-260);
+  var zones=[],sel=['.msgcard','.ask'],j,tx,ty;
+  for(j=0;j<sel.length;j++){var el=document.querySelector(sel[j]);if(el){var zr=el.getBoundingClientRect();if(zr.width)zones.push(zr);}}
+  for(var i=0;i<30;i++){
+    tx=80+Math.random()*Math.max(1,innerWidth-160);
+    ty=90+Math.random()*Math.max(1,innerHeight-260);
+    var bad=false;
+    for(j=0;j<zones.length;j++){var z=zones[j];if(tx>z.left-60&&tx<z.right+60&&ty>z.top-60&&ty<z.bottom+60){bad=true;break;}}
+    if(!bad)break;
+  }
+  ang.tx=tx;ang.ty=ty;
   ang.next=now+1400+Math.random()*1400;
 }
 function startAngel(){
@@ -568,7 +599,7 @@ function spawnEmber(){
   if(Math.random()<.14){e.textContent=['💀','🔥','👻'][Math.floor(Math.random()*3)];e.style.fontSize=(22+Math.random()*22)+'px';}
   else{var s=3+Math.random()*7;e.style.width=e.style.height=s+'px';}
   e.style.left=Math.random()*100+'%';e.style.animationDuration=(2+Math.random()*2.2)+'s';
-  hellEl.appendChild(e);setTimeout(function(){e.remove();},4500);
+  hellEl.appendChild(e);setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e);},4500);
 }
 function hellGo(){
   buzz([80,40,80,40,120]);
@@ -584,15 +615,15 @@ function revive(){
   flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');
   setTimeout(function(){
     clearInterval(emberTimer);
-    hellEl.classList.remove('on','vis','talk');
-    var em=hellEl.querySelectorAll('.ember');for(var i=0;i<em.length;i++)em[i].remove();
+    hellEl.classList.remove('on');hellEl.classList.remove('vis');hellEl.classList.remove('talk');
+    var em=hellEl.querySelectorAll('.ember');for(var i=0;i<em.length;i++)em[i].parentNode.removeChild(em[i]);
     app.classList.remove('falling');app.classList.add('revive');
     toastEl.classList.remove('go');void toastEl.offsetWidth;toastEl.classList.add('go');
     pauseHearts=false;
   },500);
   setTimeout(function(){
     app.classList.remove('revive');state='love';locked=false;startAngel();
-    setHint('Catch the winged heart 💖 to say YES',5000);
+    setHint('Papindot nung winged heart 💖 to say YES',5000);
   },1700);
 }
 
